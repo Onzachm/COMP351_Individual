@@ -7,7 +7,7 @@ let storage = [];
 function fill() {
     xhttp.open("GET", endPoint, true);
     xhttp.send();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             storage = JSON.parse(this.responseText);
             console.log(JSON.parse(this.responseText));
@@ -21,18 +21,18 @@ console.log[storage[0]];
 
 setTimeout(() => {
     for (i = 0; i < storage.length; i++) {
-
+        
         add(storage[i].id, storage[i].quote);
         divCount++;
     }
-}, 2000);
+}, 3000);
 
 function add(id, quote) {
 
     let div = document.createElement("div");
 
     let div2 = document.createElement("div");
-    if (id === undefined) {
+    if (id === undefined){
         divCount++;
         div2.id = divCount;
     }
@@ -43,7 +43,7 @@ function add(id, quote) {
     e1.name = 'quote';
     e1.style.height = "80px";
     e1.style.width = "200px";
-    if (quote === undefined) {
+    if (quote === undefined){
         e1.innerHTML = "";
     }
     else e1.innerHTML = quote;
@@ -108,8 +108,6 @@ function del() {
 }
 
 function post() {
-
-    console.log("starting to post");
     let obj = {
         id: divCount,
         body: JSON.stringify(params.value)

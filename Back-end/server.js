@@ -10,6 +10,7 @@ const mysql = require("mysql");
 const express = require("express");
 const exp = express();
 const { runInNewContext } = require('vm');
+const endPoint = "/COMP351/labs/individual/server"
 
 
 const db = mysql.createConnection({
@@ -26,9 +27,7 @@ exp.use(function (req, res, next) {
     next();
 });
 
-
-
-exp.post("/COMP351/labs/individual/server", (req, res) => {
+exp.post(endPoint, (req, res) => {
 
     
     let body = "";
@@ -56,39 +55,46 @@ exp.post("/COMP351/labs/individual/server", (req, res) => {
     });
 });
 
-exp.delete("/COMP351/labs/individual/server/", (req, res) => {
-    
-        let body = "";
+exp.delete(endPoint, (req, res) => {
 
-        req.on('data', function (chunk) {
-            let stringbody = JSON.stringify(chunk);
-            if (stringbody !== null) {
-                body += stringbody;
-                
-            }
-        });
-       
-       
-       req.on('end', function()
-       {
-           let parsedBody = JSON.parse(body);
-          
-           let index = parsedBody.id;
+    let body = "";
+
+    req.on('data', function (chunk){
+       console.log("chunk is "+ JSON.stringify(chunk));
+       if(chunk !== null){
+           body += chunk;
+       }
+   })
+   
+   req.on('end', function()
+   {
+       let parsedBody = JSON.parse(body);
+
+   
+       let index = parsedBody.id;
+       let quote = parsedBody.body;
+
            
-        db.query("DELETE FROM individual WHERE ( ID = "+ index + ')', function (err,result){
-               if(err) throw err;
-           });
-  
-       });
-});
+   
+       
+    db.query("DELETE FROM individual WHERE ( id = "+ index + ')', function (err,result){
+           if(err) throw err;
 
-exp.get("/COMP351/labs/individual/server", (req, res) =>{
+       })
+
+   })
+   console.log("inside delete")
+})
+
+exp.get(endPoint, (req, res) =>{
     console.log("connected, inside get")
     db.query("SELECT * FROM `individual`", function (err, result){
         if (err) throw err;
         res.send(result);
     });
 });
+
+
 
 
 exp.listen();
