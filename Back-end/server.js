@@ -72,11 +72,8 @@ exp.delete("/COMP351/labs/individual/server/", (req, res) => {
        req.on('end', function()
        {
            let parsedBody = JSON.parse(body);
-           
-       
+          
            let index = parsedBody.id;
-               
-       
            
         db.query("DELETE FROM individual WHERE ( ID = "+ index + ')', function (err,result){
                if(err) throw err;
