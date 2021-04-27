@@ -84,6 +84,7 @@ function add(id, quote) {
     div.appendChild(div2);
 
     document.getElementById("main").appendChild(div);
+    document.getElementById("head").hidden = "True";
 
 }
 
