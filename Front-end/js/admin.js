@@ -39,8 +39,6 @@ function add(id, quote) {
     else div2.id = id;
 
     let e1 = document.createElement("textarea");
-    e1.id = 'quote';
-    e1.name = 'quote';
     e1.style.height = "80px";
     e1.style.width = "200px";
     if (quote === undefined){
@@ -50,7 +48,6 @@ function add(id, quote) {
 
     let e2 = document.createElement("input");
     e2.type = 'button';
-    e2.id = 'delete';
     e2.value = "Delete";
     e2.style.margin = "5px";
 
@@ -62,7 +59,6 @@ function add(id, quote) {
 
     let e3 = document.createElement("input");
     e3.type = 'button';
-    e3.id = 'save';
     e3.value = "Save";
     e3.style.margin = "5px";
 
@@ -72,8 +68,7 @@ function add(id, quote) {
 
     let e4 = document.createElement("input");
     e4.type = 'button';
-    e4.id = 'change';
-    e4.value = "Change Quote";
+    e4.value = "Update";
     e4.style.margin = "5px";
 
     e4.onclick = function () {
@@ -85,6 +80,7 @@ function add(id, quote) {
     div2.appendChild(e1);
     div2.appendChild(e2);
     div2.appendChild(e3);
+    div2.appendChild(e4);
     div.appendChild(div2);
 
     document.getElementById("main").appendChild(div);
